@@ -2,6 +2,8 @@
 
 Repo này chứa mã chạy thử code blink (một dạng hello world trong thế giới nhúng) trên board phát triển ESP32-C3 Super Mini.
 
+Mục đích demo: Trình diễn một cách can thiệp sâu hơn vào nền tảng phát triển mã nhúng cho các vi điều khiển PlatformIO. Đó là cách tự khai báo một board phát triển mới, không có sẵn trong danh sách bảng mạch của PIO. Nhằm giúp sinh viên hiểu sâu hơn về cơ chế hoạt động của bộ công cụ phát triển tích hợp PIO. 
+
 ## Đặt vấn đề 
 
 Board `ESP32-C3 Super Mini` là một board có kích thước siêu nhỏ, tối giản, giá thành thấp nhất trong các board đang có trên thị trường. Tôi mua trên shopee ở thời điểm hiện tại giá chưa tới 50k một board. 
@@ -40,3 +42,13 @@ Nếu quá trình trên trơn chu và không cần phải bấm tổ hợp phím
 
 - Để có thể search board mới tạo trên PIO Home (hoặc `pio boards` list) thì thêm file json vừa nhắc vào `~/.platformio/platforms/espressif32/boards/`
 - Để có thể định nghĩa cụ thể các chân custom trên board mới như: Built in LEDs, Bult in buttons, thì làm file `pins_arduino.h` và thêm vào `~/.platformio/packages/framework-arduinoespressif32/variants/super_mini_esp32c3/pins_arduino.h`. Tham khảo chi tiết: https://github.com/sigmdel/supermini_esp32c3_sketches/blob/main/resources/README.md
+
+--- 
+
+## Tóm tắt các bước
+
+1. Tạo file `boards/esp32c3_super_mini.json` trong thư mục dự án. Nội dung như file `esp32c3_super_mini.json` tham khảo trong repo này
+2. Tạo file `variants/esp32c3_super_mini/pins_arduino.h` để định nghĩa các hằng số chân cho board mới, trong thư mục của dự án.
+3. Trong `platformio.ini`:
+    - Có thể sử dụng board mới định nghĩa bằng: `board = esp32c3_super_mini`
+    - Sử dụng các chân mới định nghĩa ở trên bằng: `board_build.variants_dir = variants`
